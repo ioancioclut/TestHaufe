@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const port = 3000;
+
 var app = express();
 
 // view engine setup
@@ -38,4 +40,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
