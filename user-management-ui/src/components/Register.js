@@ -52,6 +52,7 @@ export default class Register extends React.Component {
                         <br/>
                         <TextField
                             hintText="Enter password"
+                            type="password"
                             floatingLabelText="Password"
                             onChange={e => this.handlePasswordChange(e)}
                         />
