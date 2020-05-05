@@ -4,9 +4,10 @@ import AppBar from 'material-ui/AppBar';
 import {RaisedButton, TextField} from "material-ui";
 import axios from "axios";
 import {hostUrl} from "../config";
+import {withRouter} from "react-router-dom";
 
 
-export default class Register extends React.Component {
+class Register extends React.Component {
     state = {
         username: "",
         password: ""
@@ -29,10 +30,13 @@ export default class Register extends React.Component {
                 password: this.state.password
             }
             axios.post(hostUrl + '/users', user).then(res=>{
+                this.props.history.push('users');
                 console.log("User was successfully created");
             }).catch(err=>{
                 console.log("Error creating user: " + err.message);
             })
+
+
         }
     };
 
@@ -65,4 +69,4 @@ export default class Register extends React.Component {
         );
     }
 }
-
+export default withRouter(Register)
