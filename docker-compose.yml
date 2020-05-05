@@ -1,11 +1,25 @@
 version: '3'
 services:
 
+  postgres-db:
+    image: postgres
+    environment:
+      POSTGRES_USER: haufe
+      POSTGRES_PASSWORD: test
+    ports:
+    - 5432:5432
+
   user-management:
     build: ./UserManagement
     container_name: user-management
+    environment:
+      DB_USER: haufe
+      DB_PASSWORD: test
+      DB_HOST: postgres-db
     ports:
     - 3001:3001
+    links:
+      - postgres-db
 
   user-management-ui:
      build: ./user-management-ui
@@ -14,6 +28,7 @@ services:
        - 3000:3000
      links:
        - user-management
+
 
 
 
