@@ -2,6 +2,8 @@ import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {RaisedButton, TextField} from "material-ui";
+import axios from "axios";
+import {hostUrl} from "../config";
 
 
 export default class Register extends React.Component {
@@ -10,14 +12,28 @@ export default class Register extends React.Component {
         password: ""
     }
 
-    change = e => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+    handleUserChange = e => {
+        this.setState({username: e.target.value});
     };
 
-    save = () => {
-        console.log(this.state);
+    handlePasswordChange = e => {
+        this.setState({password: e.target.value});
+    };
+
+    register = () => {
+        if (this.state.username.trim()==='' || this.state.password.trim()===''){
+            alert('Username and password must not be empty');
+        }else{
+            const user = {
+                name: this.state.username,
+                password: this.state.password
+            }
+            axios.post(hostUrl + '/users', user).then(res=>{
+                console.log("User was successfully created");
+            }).catch(err=>{
+                console.log("Error creating user: " + err.message);
+            })
+        }
     };
 
     render() {
@@ -31,16 +47,16 @@ export default class Register extends React.Component {
                         <TextField
                             hintText="Enter username"
                             floatingLabelText="Username"
-                            onChange={e => this.change(e)}
+                            onChange={e => this.handleUserChange(e)}
                         />
                         <br/>
                         <TextField
                             hintText="Enter password"
                             floatingLabelText="Password"
-                            onChange={e => this.change(e)}
+                            onChange={e => this.handlePasswordChange(e)}
                         />
                         <br/>
-                        <RaisedButton label="Register" primary={true}/>
+                        <RaisedButton label="Register" primary={true} onClick={this.register}/>
                         <br/>
                     </div>
                 </MuiThemeProvider>

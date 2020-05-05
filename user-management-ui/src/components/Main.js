@@ -3,6 +3,7 @@ import {Component} from "react";
 import axios from "axios";
 import NotAvailable from "./NotAvailable";
 import Register from "./Register";
+import {hostUrl} from "../config";
 
 export default class Main extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ export default class Main extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3001/healthCheck').then(response => {
+        axios.get(hostUrl + '/healthCheck').then(response => {
             if (response.status === 200) {
                 this.setState({isAlive: true});
             } else {
