@@ -13,8 +13,12 @@ export default class Main extends Component {
     componentDidMount() {
         axios.get('/healthCheck').then(response => {
             if (response.status === 200) {
-                this.setState({isAlive: true})
+                this.setState({isAlive: true});
+            } else {
+                this.setState({isAlive: false});
             }
+        }).catch(() => {
+            this.setState({isAlive: false});
         });
     }
 
