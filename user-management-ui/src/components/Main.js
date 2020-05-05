@@ -11,7 +11,7 @@ export default class Main extends Component {
     }
 
     componentDidMount() {
-        axios.get('/healthCheck').then(response => {
+        axios.get('http://localhost:3001/healthCheck').then(response => {
             if (response.status === 200) {
                 this.setState({isAlive: true});
             } else {
