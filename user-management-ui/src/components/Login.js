@@ -25,19 +25,19 @@ class Register extends React.Component {
 
     register = () => {
         if (this.state.username.trim() === '' || this.state.password.trim() === '') {
-            this.setState({error:messages.emptyUserOrPassword});
+            this.setState({error: messages.emptyUserOrPassword});
         } else {
             const user = {
                 name: this.state.username,
                 password: this.state.password
             }
-            // axios.post(hostUrl + '/users', user).then(res => {
-            //     this.props.history.push('users');
-            //     console.log("User was successfully created");
-            // }).catch(err => {
-            //     this.setState({error: messages.errorCreatingUser});
-            //     console.log("Error creating user: " + err.message);
-            // })
+            axios.post(hostUrl + '/users/login', user).then(res => {
+                console.log("Successfully login: " + res.data.name);
+                this.props.history.push('users');
+            }).catch(err => {
+                this.setState({error: messages.invalidCredentials});
+                console.log("Error login: " + err.message);
+            })
         }
     };
 
@@ -66,7 +66,7 @@ class Register extends React.Component {
                         <br/><br/>
                         <RaisedButton label="Login" primary={true} onClick={this.register}/>
                         <br/>
-                        Don't have an account?  <Link to="/register">Register</Link>
+                        Don't have an account? <Link to="/register">Register</Link>
                     </div>
                 </MuiThemeProvider>
             </div>

@@ -32,7 +32,7 @@ class Register extends React.Component {
                 password: this.state.password
             }
             axios.post(hostUrl + '/users', user).then(res => {
-                this.props.history.push('users');
+                this.props.history.push('login');
                 console.log("User was successfully created");
             }).catch(err => {
                 this.setState({error: messages.errorCreatingUser});

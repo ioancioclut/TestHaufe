@@ -1,4 +1,5 @@
 {
   "emptyUserOrPassword": "User name or password is empty",
-  "errorCreatingUser": "Error creating user. The user might already exist"
+  "errorCreatingUser": "Error creating user. The user might already exist",
+  "invalidCredentials": "Invalid user name or password"
 }

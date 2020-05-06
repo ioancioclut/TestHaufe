@@ -10,7 +10,7 @@ import Login from "./components/Login";
 
 class App extends Component {
 
-    redirectToRegister() {
+    redirectToLogin() {
         this.props.history.push('login');
     }
 
@@ -21,7 +21,7 @@ class App extends Component {
     componentDidMount() {
         axios.get(hostUrl + '/healthCheck').then(response => {
             if (response.status === 200) {
-                this.redirectToRegister();
+                this.redirectToLogin();
             } else {
                 this.redirectToUnavailable()
             }
