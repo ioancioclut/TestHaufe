@@ -12,6 +12,9 @@ const user = (sequelize) => {
                 validate: {
                     notEmpty: true
                 }
+            },
+            role: {
+                type: Sequelize.STRING
             }
         },
         {
