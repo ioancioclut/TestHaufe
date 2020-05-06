@@ -31,7 +31,6 @@ export default class Users extends Component {
                 <MuiThemeProvider>
                     <div>
                         <AppBar title="Users"/>
-                        <Link to="/register">Register</Link>
                         <div className="container">
                             <div className="center">
                                 <Table>

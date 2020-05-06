@@ -4,7 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import {RaisedButton, TextField} from "material-ui";
 import axios from "axios";
 import {hostUrl} from "../config";
-import {withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import messages from "./messages.json"
 
 
@@ -31,13 +31,13 @@ class Register extends React.Component {
                 name: this.state.username,
                 password: this.state.password
             }
-            axios.post(hostUrl + '/users', user).then(res => {
-                this.props.history.push('users');
-                console.log("User was successfully created");
-            }).catch(err => {
-                this.setState({error: messages.errorCreatingUser});
-                console.log("Error creating user: " + err.message);
-            })
+            // axios.post(hostUrl + '/users', user).then(res => {
+            //     this.props.history.push('users');
+            //     console.log("User was successfully created");
+            // }).catch(err => {
+            //     this.setState({error: messages.errorCreatingUser});
+            //     console.log("Error creating user: " + err.message);
+            // })
         }
     };
 
@@ -47,7 +47,7 @@ class Register extends React.Component {
                 <MuiThemeProvider>
                     <div>
                         <AppBar
-                            title="Register"
+                            title="Login"
                         />
                         <TextField
                             hintText="Enter username"
@@ -64,7 +64,9 @@ class Register extends React.Component {
                         <br/>
                         {this.state.error}
                         <br/><br/>
-                        <RaisedButton label="Register" primary={true} onClick={this.register}/>
+                        <RaisedButton label="Login" primary={true} onClick={this.register}/>
+                        <br/>
+                        Don't have an account?  <Link to="/register">Register</Link>
                     </div>
                 </MuiThemeProvider>
             </div>

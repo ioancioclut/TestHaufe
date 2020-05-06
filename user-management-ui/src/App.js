@@ -6,11 +6,12 @@ import Users from "./components/Users";
 import NotAvailable from "./components/NotAvailable";
 import axios from "axios";
 import {hostUrl} from "./config";
+import Login from "./components/Login";
 
 class App extends Component {
 
     redirectToRegister() {
-        this.props.history.push('register');
+        this.props.history.push('login');
     }
 
     redirectToUnavailable() {
@@ -32,6 +33,7 @@ class App extends Component {
             <div className="App">
                 <Switch>
                     <Route path="/register" component={Register}/>
+                    <Route path="/login" component={Login}/>
                     <Route path="/users" component={Users}/>
                     <Route path="/unavailable" component={NotAvailable}/>
                 </Switch>
