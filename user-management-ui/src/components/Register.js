@@ -35,8 +35,6 @@ class Register extends React.Component {
             }).catch(err=>{
                 console.log("Error creating user: " + err.message);
             })
-
-
         }
     };
 

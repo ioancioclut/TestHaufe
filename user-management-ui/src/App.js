@@ -18,7 +18,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-       axios.get(hostUrl + '/healthCheck').then(response => {
+        axios.get(hostUrl + '/healthCheck').then(response => {
             if (response.status === 200) {
                 this.redirectToRegister();
             } else {
@@ -30,13 +30,11 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <div className="App-intro">
-                    <Switch>
-                        <Route path="/register" component={Register}/>
-                        <Route path="/users" component={Users}/>
-                        <Route path="/unavailable" component={NotAvailable}/>
-                    </Switch>
-                </div>
+                <Switch>
+                    <Route path="/register" component={Register}/>
+                    <Route path="/users" component={Users}/>
+                    <Route path="/unavailable" component={NotAvailable}/>
+                </Switch>
             </div>
         );
     }
