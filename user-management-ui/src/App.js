@@ -7,6 +7,7 @@ import NotAvailable from "./components/NotAvailable";
 import axios from "axios";
 import {hostUrl} from "./config";
 import Login from "./components/Login";
+import ExternalPage from "./components/ExternalPage";
 
 class App extends Component {
 
@@ -36,6 +37,7 @@ class App extends Component {
                     <Route path="/login" component={Login}/>
                     <Route path="/users" component={Users}/>
                     <Route path="/unavailable" component={NotAvailable}/>
+                    <Route path="/external" component={ExternalPage}/>
                 </Switch>
             </div>
         );

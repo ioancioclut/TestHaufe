@@ -2,13 +2,12 @@ import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {RaisedButton, TextField} from "material-ui";
-import axios from "axios";
-import {hostUrl} from "../config";
 import {Link, withRouter} from "react-router-dom";
 import messages from "./messages.json"
+import {loginUser} from "../UserService"
 
 
-class Register extends React.Component {
+class Login extends React.Component {
     state = {
         username: "",
         password: "",
@@ -23,7 +22,7 @@ class Register extends React.Component {
         this.setState({password: e.target.value});
     };
 
-    register = () => {
+    login = () => {
         if (this.state.username.trim() === '' || this.state.password.trim() === '') {
             this.setState({error: messages.emptyUserOrPassword});
         } else {
@@ -31,9 +30,13 @@ class Register extends React.Component {
                 name: this.state.username,
                 password: this.state.password
             }
-            axios.post(hostUrl + '/users/login', user).then(res => {
-                console.log("Successfully login: " + res.data.name);
-                this.props.history.push('users');
+           loginUser(user).then(res => {
+               if (res.data.role==='internal') {
+                   console.log("Successfully login: " + res.data.name);
+                   this.props.history.push('users');
+               } else {
+                   this.props.history.push('external');
+               }
             }).catch(err => {
                 this.setState({error: messages.invalidCredentials});
                 console.log("Error login: " + err.message);
@@ -64,7 +67,7 @@ class Register extends React.Component {
                         <br/>
                         {this.state.error}
                         <br/><br/>
-                        <RaisedButton label="Login" primary={true} onClick={this.register}/>
+                        <RaisedButton label="Login" primary={true} onClick={this.login}/>
                         <br/>
                         Don't have an account? <Link to="/register">Register</Link>
                     </div>
@@ -74,4 +77,4 @@ class Register extends React.Component {
     }
 }
 
-export default withRouter(Register)
+export default withRouter(Login)

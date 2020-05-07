@@ -2,8 +2,7 @@ import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {RaisedButton, TextField} from "material-ui";
-import axios from "axios";
-import {hostUrl} from "../config";
+import {registerUser} from "../UserService";
 import {withRouter} from "react-router-dom";
 import messages from "./messages.json"
 
@@ -25,14 +24,14 @@ class Register extends React.Component {
 
     register = () => {
         if (this.state.username.trim() === '' || this.state.password.trim() === '') {
-            this.setState({error:messages.emptyUserOrPassword});
+            this.setState({error: messages.emptyUserOrPassword});
         } else {
             const user = {
                 name: this.state.username,
                 password: this.state.password
             }
-            axios.post(hostUrl + '/users', user).then(res => {
-                this.props.history.push('login');
+            registerUser(user).then(res => {
+                this.props.history.push('users');
                 console.log("User was successfully created");
             }).catch(err => {
                 this.setState({error: messages.errorCreatingUser});

@@ -53,7 +53,7 @@ router.get('/externals', authenticate, (req, res, next) => {
 });
 
 /* Create user with 'external' role */
-router.post('/externals', authenticate, (req, res, next) => {
+router.post('/externals/register', authenticate, (req, res, next) => {
     if (req.user.role === Roles.INTERNAL) {
         registerUser(req, res, next, Roles.EXTERNAL);
     } else {
